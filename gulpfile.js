@@ -2,8 +2,7 @@
 var gulp = require('gulp');
 
 // server
-var connect = require('gulp-connect');
-var livereload = require('gulp-livereload');
+var browserSync = require('browser-sync').create();
 
 // utilities
 var notify = require('gulp-notify');
@@ -23,26 +22,26 @@ var order = require('gulp-order');
 
 
 // gulp defaults
-gulp.task('default', ['connect', 'clean', 'watch'], function() {
+gulp.task('default', [ 'clean', 'serve'], function() {
 	gulp.start('sass', 'html', 'vendor', 'js');
 });
 
-// watch livereload
-gulp.task('watch', function() {
+// browser sync server and watch/live changes
+gulp.task('serve', function() {
+	browserSync.init({
+		server: {
+			baseDir: './dev_build'
+		},
+		port: 8088,
+		open: false
+		//proxy: 'localhost:8088'
+	});
+
 	gulp.watch('./src/app/sass/**/*.scss', ['sass']);
 	gulp.watch('./src/**/*.html', ['html']);
 	gulp.watch('./src/app/**/*.js', ['js']);
-	livereload.listen();
-	gulp.watch(['dev_build/**']).on('change', livereload.changed);
-});
+	gulp.watch('./dev_build/**').on('change', browserSync.reload);
 
-// connect to web server
-gulp.task('connect', function() {
-	connect.server({
-		root: 'dev_build',
-		livereload: true,
-		port: 8088
-	});
 });
 
 // compile css
@@ -51,6 +50,7 @@ gulp.task('sass', function() {
 	.pipe(sass().on('error', sass.logError))
 	.pipe(minifycss())
 	.pipe(gulp.dest('dev_build/css'))
+	.pipe(browserSync.stream())
 	.pipe(notify({ message: 'SASS compiled successfully' }));
 });
 
@@ -64,12 +64,13 @@ gulp.task('html', function() {
 // bundle app js files
 gulp.task('js', function() {
 	return gulp.src(['./src/app/app.js', './src/app/**/*.js'])
-	.pipe(sourcemaps.init())
+	.pipe(sourcemaps.init()) // not needed for production
 		.pipe(concat('app.bundle.min.js'))
 		.pipe(ngAnnotate()) // adds angular dependency injection annotations
 		.pipe(uglify())
-	.pipe(sourcemaps.write())
+	.pipe(sourcemaps.write()) // not needed for production
 	.pipe(gulp.dest('./dev_build/js'))
+	.pipe(browserSync.stream())
 	.pipe(notify({ message: 'JS compiled successfully' }));
 });
 
@@ -81,7 +82,14 @@ gulp.task('vendor', function(){
 			bowerDirectory: './bower_components'
   	}
   }))
-  .pipe(order(["*jquery*", "*angular*", "*bootstrap-sass*"]))
+  /*.pipe(order([
+  	"*jquery*", 
+  	"*angular*", 
+  	"*bootstrap-sass*",
+  	"*angular-ui-router*",
+  	"*firebase*",
+  	"*angularfire*"
+  	]))*/
   .pipe(concat('vendor.bundle.min.js'))
   .pipe(uglify().on('error', function(e) {
   	console.log('\x07',e.message); return this.end(); 
