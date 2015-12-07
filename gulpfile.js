@@ -8,6 +8,7 @@ var browserSync = require('browser-sync').create();
 var notify = require('gulp-notify');
 var del = require('del');
 var concat = require('gulp-concat');
+var rename = require('gulp-rename');
 
 // sass
 var sass = require('gulp-sass');
@@ -20,10 +21,13 @@ var sourcemaps = require('gulp-sourcemaps');
 var mainBowerFiles = require('main-bower-files');
 var order = require('gulp-order');
 
+// html templates
+var templateCache = require('gulp-angular-templatecache');
+
 
 // gulp defaults
 gulp.task('default', [ 'clean', 'serve'], function() {
-	gulp.start('sass', 'html', 'vendor', 'js');
+	gulp.start('sass', 'html', 'vendor', 'js', 'templates');
 });
 
 // browser sync server and watch/live changes
@@ -38,7 +42,8 @@ gulp.task('serve', function() {
 	});
 
 	gulp.watch('./src/app/sass/**/*.scss', ['sass']);
-	gulp.watch('./src/**/*.html', ['html']);
+	gulp.watch('./src/app/index.html', ['html']);
+	gulp.watch('./src/app/templates/**/*.html', ['templates']);
 	gulp.watch('./src/app/**/*.js', ['js']);
 	gulp.watch('./dev_build/**').on('change', browserSync.reload);
 
@@ -60,6 +65,16 @@ gulp.task('html', function() {
 	.pipe(gulp.dest('dev_build'))
 	.pipe(notify({ message: 'HTML moved to dev_build successfully' }));
 });
+
+gulp.task('templates', function() {
+	return gulp.src('./src/app/templates/**/*.html')
+	.pipe(templateCache('templates.bundle.min.js', {
+		module: 'templatesCache',
+		standalone: true
+	}))
+	.pipe(gulp.dest('./dev_build/js'))
+	.pipe(notify({ message: 'Templates compiled to dev_build successfully' }));
+})
 
 // bundle app js files
 gulp.task('js', function() {
