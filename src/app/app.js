@@ -17,7 +17,7 @@ angular.module('ag-app', [
 			resolve: {
 			  requireNoAuth: function($state, Auth){
 			    return Auth.$requireAuth().then(function(auth){
-			      $state.go('home');
+			      $state.go('dashboard');
 			    }, function(error){
 			      return;
 			    });
@@ -37,6 +37,23 @@ angular.module('ag-app', [
 			    });
 			  }
 			}
+		})
+		.state('dashboard', {
+			url: '/dashboard',
+			controller: 'DashboardCtrl as dashboardCtrl',
+			templateUrl: 'dashboard.html',
+			resolve: {
+		    auth: function($state, Users, Auth){
+		      return Auth.$requireAuth().catch(function(){
+		        $state.go('home');
+		      });
+		    },
+		    dashboard: function(Logs, Auth){
+		      return Auth.$requireAuth().then(function(auth){
+		        return Logs.getLogs(auth.uid).$loaded();
+		      });
+		    }
+		  }
 		})
 		.state('profile', {
 			url: '/profile',

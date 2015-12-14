@@ -32,5 +32,10 @@ angular.module('ag-app')
 		});
 	};
 
+	authCtrl.logOut = function() {
+		Auth.$unauth();
+		$state.go('home');
+	}
+
 
 });
