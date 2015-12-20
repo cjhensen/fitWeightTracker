@@ -1,0 +1,14 @@
+<h3>Login</h3>
+<div ng-show="authCtrl.error">
+  <span>{{ authCtrl.error.message }}</span>
+</div>
+<form ng-submit="authCtrl.login()">
+	<label>Email:
+	<input ng-model="authCtrl.user.email" type="email" placeholder="Email">
+	</label>
+
+	<label>Password:
+	<input ng-model="authCtrl.user.password" type="password" placeholder="Password">
+	</label>
+	<input type="submit" class="btn btn-default" value="Log In">
+</form>
