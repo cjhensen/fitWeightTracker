@@ -32,7 +32,7 @@ angular.module('ag-app')
 		});
 	};
 
-	authCtrl.logOut = function() {
+	authCtrl.logout = function() {
 		Auth.$unauth();
 		$state.go('home');
 	}
