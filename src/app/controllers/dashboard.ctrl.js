@@ -12,5 +12,4 @@ angular.module('ag-app')
 		dashboardCtrl.dashboard.$save();
 	};
 
-
 });

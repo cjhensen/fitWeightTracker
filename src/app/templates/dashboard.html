@@ -1,5 +1,5 @@
 <h1>This is the dashboard!! You can only access it when you are logged in</h1>
-<logOut></logOut><!-- create a directive here for the logout button -->
+<button ng-click="authCtrl.logOut()">Logout</button>
 <button ng-click="dashboardCtrl.testDCtrl()">Testing retrieving logs</button>
 
 <form ng-submit="dashboardCtrl.addLog()">

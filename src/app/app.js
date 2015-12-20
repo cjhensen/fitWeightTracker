@@ -1,3 +1,4 @@
+// Configure the routes for the app
 angular.module('ag-app', [
 	'firebase', 
 	'ui.router', 
