@@ -1,0 +1,38 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: $page-background;
+}
+
+.wrapper {
+	margin-top: $break-large;
+}
+
+.ag-input {
+	height: 40px;
+	background: #fff;
+	border: 1px solid $black-20;
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+.ag-btn {
+	background: #fff;
+	border: none;
+	height: 40px;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: $black-60;
+	border-radius: 0;
+}
+.ag-btn--blue {
+	background: rgba(46, 55, 64, 1.0);
+	color: #fff;
+}
+.ag-btn--red {
+	background: rgba(237, 97, 112, 1.0);
+	color: #fff;
+}

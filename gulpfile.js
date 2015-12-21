@@ -27,7 +27,7 @@ var templateCache = require('gulp-angular-templatecache');
 
 // gulp defaults
 gulp.task('default', [ 'clean', 'serve'], function() {
-	gulp.start('sass', 'html', 'vendor', 'js', 'templates');
+	gulp.start('sass', 'html', 'vendor', 'js', 'templates', 'images', 'favicon');
 });
 
 // browser sync server and watch/live changes
@@ -43,6 +43,8 @@ gulp.task('serve', function() {
 
 	gulp.watch('./src/app/sass/**/*.scss', ['sass']);
 	gulp.watch('./src/app/index.html', ['html']);
+	gulp.watch('./src/app/images/**', ['images']);
+	gulp.watch('./src/app/favicon.ico', ['favicon']);
 	gulp.watch('./src/app/templates/**/*.html', ['templates']);
 	gulp.watch('./src/app/**/*.js', ['js']);
 	gulp.watch('./dev_build/**').on('change', browserSync.reload);
@@ -64,6 +66,18 @@ gulp.task('html', function() {
 	return gulp.src('./src/index.html')
 	.pipe(gulp.dest('dev_build'))
 	.pipe(notify({ message: 'HTML moved to dev_build successfully' }));
+});
+
+gulp.task('images', function() {
+	return gulp.src('./src/app/images/**')
+	.pipe(gulp.dest('dev_build/images'))
+	.pipe(notify({ message: 'Images moved to dev_build successfully' }));
+});
+
+gulp.task('favicon', function() {
+	return gulp.src(['./src/app/icon.png', './src/app/favicon.ico'])
+	.pipe(gulp.dest('dev_build'))
+	.pipe(notify({ message: 'Favicon moved to dev_build successfully' }));
 });
 
 gulp.task('templates', function() {

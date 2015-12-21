@@ -1,0 +1,17 @@
+.ag-logo {
+	img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	margin-bottom: $break-large;
+}
+
+.ag-auth-form {
+	input {
+		margin-bottom: 6px;
+	}
+}

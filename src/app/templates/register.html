@@ -1,14 +1,28 @@
-<h3>Register</h3>
-<div ng-show="authCtrl.error">
-  <span>{{ authCtrl.error.message }}</span>
-</div>
-<form ng-submit="authCtrl.register()">
-	<label>Email:
-	<input ng-model="authCtrl.user.email" type="email" placeholder="Email">
-	</label>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="ag-logo">
+			<img ui-sref="login" src="images/logo.png">
+		</div><!-- end .logo -->
+	</div>
 
-	<label>Password:
-	<input ng-model="authCtrl.user.password" type="password" placeholder="Password">
-	</label>
-	<input type="submit" class="btn btn-default" value="Register">
-</form>
+		<div class="ag-auth-form">
+			<h3 class="center">Register</h3>
+			<form ng-submit="authCtrl.register()">
+				<div class="row">	
+					<input class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-5 ag-input" ng-model="authCtrl.user.email" type="email" placeholder="Email">
+				</div>
+				<div class="row">
+					<input class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-5 ag-input" ng-model="authCtrl.user.password" type="password" placeholder="Password">
+				</div>
+					<div class="row">
+						<input class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-5 ag-btn ag-btn--red" type="submit" value="Register">
+					</div>
+			</form>
+			<div class="row">
+				<div ng-show="authCtrl.error" class="col-xs-8 col-xs-offset-2 alert alert-danger" role="alert">
+				  <span>{{ authCtrl.error.message }}</span>
+				</div>
+			</div>
+		</div><!-- end .ag-auth-form -->
+
+</div>
