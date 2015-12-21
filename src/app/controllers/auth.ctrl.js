@@ -13,7 +13,7 @@ angular.module('ag-app')
 		// authWithPassword by passing in the user
 		// then it redirects to the home state if authentication was successful
 		Auth.$authWithPassword(authCtrl.user).then(function(auth) {
-			$state.go('home');
+			$state.go('dashboard');
 		}, function(error) {
 			authCtrl.error = error;
 		});
@@ -34,7 +34,7 @@ angular.module('ag-app')
 
 	authCtrl.logout = function() {
 		Auth.$unauth();
-		$state.go('home');
+		$state.go('login');
 	}
 
 

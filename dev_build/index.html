@@ -5,17 +5,23 @@
 		<title>AG v1.0.0</title>
 		<meta charset="UTF8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<meta name="keywords" content="">
 		<link href="css/app.css" rel="stylesheet" type="text/css">
 		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/icon.png"/>
+		<link rel="apple-touch-icon" sizes="72x72" href="/icon.png"/>
+		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/icon.png"/>
 
 	</head>
 	<body>
 
 		<div class="wrapper">
-			<ui-view></ui-view>
+			<div class="container">
+				<ui-view></ui-view>
+			</div>
 		</div><!-- end .wrapper -->
 
 

@@ -7,12 +7,8 @@ angular.module('ag-app', [
 	])
 .config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
-		.state('home', {
-			url: '/',
-			templateUrl: 'home.html'
-		})
 		.state('login', {
-			url: '/login',
+			url: '/',
 			controller: 'AuthCtrl as authCtrl',
 			templateUrl: 'login.html',
 			resolve: {
@@ -32,7 +28,7 @@ angular.module('ag-app', [
 			resolve: {
 			  requireNoAuth: function($state, Auth){
 			    return Auth.$requireAuth().then(function(auth){
-			      $state.go('home');
+			      $state.go('login');
 			    }, function(error){
 			      return;
 			    });
@@ -46,7 +42,7 @@ angular.module('ag-app', [
 			resolve: {
 		    auth: function($state, Users, Auth){
 		      return Auth.$requireAuth().catch(function(){
-		        $state.go('home');
+		        $state.go('login');
 		      });
 		    },
 		    dashboard: function(Logs, Auth){
@@ -63,7 +59,7 @@ angular.module('ag-app', [
 			resolve: {
 		    auth: function($state, Users, Auth){
 		      return Auth.$requireAuth().catch(function(){
-		        $state.go('home');
+		        $state.go('login');
 		      });
 		    },
 		    profile: function(Users, Auth){
