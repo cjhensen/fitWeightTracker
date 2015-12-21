@@ -1,11 +1,54 @@
-<h1>This is the dashboard!! You can only access it when you are logged in</h1>
 <logout></logout>
-<button ng-click="dashboardCtrl.testDCtrl()">Testing retrieving logs</button>
+<!--<
+button ng-click="dashboardCtrl.testDCtrl()">Testing retrieving logs</button>
+<button ng-click="dashboardCtrl.setDatePicker()">Testing datepicker logs</button>
+-->
+<div class="row">
+	<div class="ag-dashboard col-xs-12">
+		<h3 class="center" ng-bind="dashboardCtrl.dashboard.date"></h3>
+		
+		<form ng-submit="dashboardCtrl.addLog()">
+			<div class="row">
+				<!--
+				<input type="date" 
+				name="ag-datepicker" 
+				id="ag-datepicker" 
+				ng-value="dashboardCtrl.dashboard.date"
+				class="col-xs-8 col-xs-offset-2 ag-input">
+				-->
+				<label class="col-xs-8 col-xs-offset-2">Weight</label>
+				<input required 
+				type="number"
+				step="0.01" 
+				placeholder="Today's weight" 
+				ng-model="dashboardCtrl.dashboard.weight"
+				class="col-xs-8 col-xs-offset-2 ag-input">
 
-<form ng-submit="dashboardCtrl.addLog()">
+				<label class="col-xs-8 col-xs-offset-2">BMI Digital</label>
+				<input 
+				type="number"
+				step="0.01"
+				placeholder="BMI Digital" 
+				ng-model="dashboardCtrl.dashboard.bmiDigital"
+				class="col-xs-8 col-xs-offset-2 ag-input">
 
-    <div class="input-group">
-      <input required type="text" class="form-control" placeholder="Today's weight" ng-model="dashboardCtrl.dashboard.weight">
-    </div>
-    <input type="submit" class="btn btn-default" value="Set Weight">
-  </form>
+				<label class="col-xs-8 col-xs-offset-2">BMI Caliper</label>
+				<input 
+				type="number"
+				step="0.01"
+				placeholder="BMI Caliper" 
+				ng-model="dashboardCtrl.dashboard.bmiCaliper"
+				class="col-xs-8 col-xs-offset-2 ag-input">
+			</div>
+
+			<div class="row">
+			<input type="submit" class="col-xs-8 col-xs-offset-2 ag-btn ag-btn--blue" value="Set Weight">
+		</div>
+		</form>
+
+		<div>Today's Weight: {{ dashboardCtrl.dashboard.weight }}</div>
+		<div>Today's BMI Digital: {{ dashboardCtrl.dashboard.bmiDigital }}</div>
+		<div>Today's BMI Caliper: {{ dashboardCtrl.dashboard.bmiCaliper }}</div>
+
+	</div><!-- end .ag-dashboard -->
+</div>
